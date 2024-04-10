@@ -45,12 +45,15 @@
             this.idLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.scoreLabel = new System.Windows.Forms.Label();
+            this.minNumToPassLabel = new System.Windows.Forms.Label();
+            this.minNumToPassUpDown = new System.Windows.Forms.NumericUpDown();
             this.tabControl.SuspendLayout();
             this.mainMenuPage.SuspendLayout();
             this.paramsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chipsUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfPlayersUpDown)).BeginInit();
             this.gamePage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minNumToPassUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -91,6 +94,8 @@
             // 
             // paramsPage
             // 
+            this.paramsPage.Controls.Add(this.minNumToPassLabel);
+            this.paramsPage.Controls.Add(this.minNumToPassUpDown);
             this.paramsPage.Controls.Add(this.startGameButton);
             this.paramsPage.Controls.Add(this.chipsLabel);
             this.paramsPage.Controls.Add(this.chipsUpDown);
@@ -118,7 +123,7 @@
             // 
             this.chipsLabel.AutoSize = true;
             this.chipsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chipsLabel.Location = new System.Drawing.Point(271, 253);
+            this.chipsLabel.Location = new System.Drawing.Point(271, 225);
             this.chipsLabel.Name = "chipsLabel";
             this.chipsLabel.Size = new System.Drawing.Size(278, 24);
             this.chipsLabel.TabIndex = 3;
@@ -127,7 +132,7 @@
             // chipsUpDown
             // 
             this.chipsUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chipsUpDown.Location = new System.Drawing.Point(555, 251);
+            this.chipsUpDown.Location = new System.Drawing.Point(555, 223);
             this.chipsUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -146,7 +151,7 @@
             // 
             this.bumberOfPlayersLabel.AutoSize = true;
             this.bumberOfPlayersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bumberOfPlayersLabel.Location = new System.Drawing.Point(349, 197);
+            this.bumberOfPlayersLabel.Location = new System.Drawing.Point(349, 169);
             this.bumberOfPlayersLabel.Name = "bumberOfPlayersLabel";
             this.bumberOfPlayersLabel.Size = new System.Drawing.Size(200, 24);
             this.bumberOfPlayersLabel.TabIndex = 1;
@@ -155,7 +160,7 @@
             // numberOfPlayersUpDown
             // 
             this.numberOfPlayersUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numberOfPlayersUpDown.Location = new System.Drawing.Point(555, 195);
+            this.numberOfPlayersUpDown.Location = new System.Drawing.Point(555, 167);
             this.numberOfPlayersUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -253,6 +258,34 @@
             this.scoreLabel.TabIndex = 6;
             this.scoreLabel.Text = "0";
             // 
+            // minNumToPassLabel
+            // 
+            this.minNumToPassLabel.AutoSize = true;
+            this.minNumToPassLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.minNumToPassLabel.Location = new System.Drawing.Point(216, 280);
+            this.minNumToPassLabel.Name = "minNumToPassLabel";
+            this.minNumToPassLabel.Size = new System.Drawing.Size(333, 24);
+            this.minNumToPassLabel.TabIndex = 6;
+            this.minNumToPassLabel.Text = "Минимальное число очков для паса";
+            // 
+            // minNumToPassUpDown
+            // 
+            this.minNumToPassUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.minNumToPassUpDown.Location = new System.Drawing.Point(555, 278);
+            this.minNumToPassUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.minNumToPassUpDown.Name = "minNumToPassUpDown";
+            this.minNumToPassUpDown.Size = new System.Drawing.Size(60, 29);
+            this.minNumToPassUpDown.TabIndex = 5;
+            this.minNumToPassUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,6 +302,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numberOfPlayersUpDown)).EndInit();
             this.gamePage.ResumeLayout(false);
             this.gamePage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minNumToPassUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -292,6 +326,8 @@
         private System.Windows.Forms.Button passButton;
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label minNumToPassLabel;
+        private System.Windows.Forms.NumericUpDown minNumToPassUpDown;
     }
 }
 

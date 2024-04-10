@@ -13,5 +13,10 @@ namespace DiceGame
         private Player currentPlayer;
         private int bankOfChips;
         private List<Roll> rollsList;
+
+        public Round()
+        {
+            // TODO
+        }
     }
 }
