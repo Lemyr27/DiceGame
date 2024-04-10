@@ -16,5 +16,20 @@ namespace DiceGame
         {
             InitializeComponent();
         }
+
+        private void selectTab(TabPage tab)
+        {
+            tabControl.SelectedTab = tab;
+        }
+
+        private void paramsButton_Click(object sender, EventArgs e)
+        {
+            selectTab(paramsPage);
+        }
+
+        private void startGameButton_Click(object sender, EventArgs e)
+        {
+            selectTab(gamePage);
+        }
     }
 }
