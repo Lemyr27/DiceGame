@@ -1,18 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiceGame
 {
     internal class Roll
     {
-        private Tuple<Player, int> playerValue;
+        public Tuple<Player, int> playerValue;
 
-        public Roll(Player player, int value)
+        public Roll(Player player)
         {
+            int value = getDiceValue();
             playerValue = new Tuple<Player, int>(player, value);
+        }
+
+        private int getDiceValue()
+        {
+            Random rand = new Random();
+            int maxValue = Dice.facets.Length + 1;
+            return rand.Next(1, maxValue);
         }
     }
 }

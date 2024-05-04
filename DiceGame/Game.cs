@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DiceGame
 {
     internal class Game
     {
-        private List<Player> playersList;
-        private List<Round> roundsList = new List<Round>();
-        private int minNumToPass;
+        public List<Player> playersList = new List<Player>();
+        public List<Round> roundsList = new List<Round>();
+        public int minNumToPass;
 
-        public Game(int playersCount, int minNumToPass)
+        public Game(int numberOfPlayers, int chipsForOnePlayer, int minNumToPass)
         {
             this.minNumToPass = minNumToPass;
-            List<Player> players = new List<Player>();
-
-            for (int i = 0; i < playersCount; i++)
+            for (int i = 0; i < numberOfPlayers; i++)
             {
-                players.Add(new Player());
+                playersList.Add(new Player(chipsForOnePlayer));
             }
-            // Начать раунд
         }
 
-        public Round newRound()
+        public Round createRound(Player currentPlayer)
         {
-            // Прописать конструктор Раунда
-            return new Round();
+            Round round = new Round(currentPlayer);
+            roundsList.Add(round);
+            return round;
         }
     }
 }

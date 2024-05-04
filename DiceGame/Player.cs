@@ -1,24 +1,38 @@
-﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Windows.Forms;
 
 namespace DiceGame
 {
     internal class Player
     {
         private static int currentId = 0;
-        private static int currentChips = 0;
-        private int id;
-        private int chips;
 
-        public Player()
+        public int id;
+        public int chips;
+
+        public Player(int chipsForOnePlayer)
         {
-            currentId += 1;
-            id = currentId;
-            this.chips = currentChips;
+            id = ++currentId;
+            chips = chipsForOnePlayer;
+        }
+
+        public Roll rollDice()
+        {
+            return new Roll(this);
+        }
+
+        public Player makePass(Game game)
+        {
+            Round round = game.roundsList.Last();
+            Player newPlayer = game.playersList[id];
+            round.currentPlayer = newPlayer;
+            return newPlayer;
+        }
+
+        public void endGame(Game game)
+        {
+
         }
     }
 }

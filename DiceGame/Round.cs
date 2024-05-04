@@ -1,22 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DiceGame
 {
     internal class Round
     {
-        private static int currentRound = 0;
+        private static int currentId = 0;
 
-        private Player currentPlayer;
-        private int bankOfChips;
-        private List<Roll> rollsList;
+        public int roundNumber;
+        public Player currentPlayer;
+        public int bankOfChips = 0;
+        public List<Roll> rollsList = new List<Roll> { };
 
-        public Round()
+        public Round(Player currentPlayer)
         {
-            // TODO
+            roundNumber = ++currentId;
+            this.currentPlayer = currentPlayer;
+        }
+
+        public int paymentPerRound(Player player)
+        {
+            if (player.chips <= 0) 
+                return -1;
+            player.chips--;
+            bankOfChips++;
+            return 1;
         }
     }
 }
