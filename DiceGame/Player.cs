@@ -25,7 +25,8 @@ namespace DiceGame
         public Player makePass(Game game)
         {
             Round round = game.roundsList.Last();
-            Player newPlayer = game.playersList[id];
+            int index = game.playersList.IndexOf(this);
+            Player newPlayer = game.playersList[index + 1];
             round.currentPlayer = newPlayer;
             return newPlayer;
         }

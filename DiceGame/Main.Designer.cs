@@ -50,6 +50,12 @@
             this.winnersLabelStatic = new System.Windows.Forms.Label();
             this.winnersListBox = new System.Windows.Forms.ListBox();
             this.newRoundButton = new System.Windows.Forms.Button();
+            this.chipsLabelStatic = new System.Windows.Forms.Label();
+            this.numChips = new System.Windows.Forms.Label();
+            this.bankChips = new System.Windows.Forms.Label();
+            this.bankChipsStaticLabel = new System.Windows.Forms.Label();
+            this.loseListBox = new System.Windows.Forms.ListBox();
+            this.loseListLabel = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.mainMenuPage.SuspendLayout();
             this.paramsPage.SuspendLayout();
@@ -116,7 +122,7 @@
             // 
             this.minNumToPassLabel.AutoSize = true;
             this.minNumToPassLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.minNumToPassLabel.Location = new System.Drawing.Point(216, 280);
+            this.minNumToPassLabel.Location = new System.Drawing.Point(216, 251);
             this.minNumToPassLabel.Name = "minNumToPassLabel";
             this.minNumToPassLabel.Size = new System.Drawing.Size(333, 24);
             this.minNumToPassLabel.TabIndex = 6;
@@ -125,9 +131,9 @@
             // minNumToPassUpDown
             // 
             this.minNumToPassUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.minNumToPassUpDown.Location = new System.Drawing.Point(555, 278);
+            this.minNumToPassUpDown.Location = new System.Drawing.Point(555, 249);
             this.minNumToPassUpDown.Minimum = new decimal(new int[] {
-            1,
+            10,
             0,
             0,
             0});
@@ -135,7 +141,7 @@
             this.minNumToPassUpDown.Size = new System.Drawing.Size(60, 29);
             this.minNumToPassUpDown.TabIndex = 5;
             this.minNumToPassUpDown.Value = new decimal(new int[] {
-            1,
+            10,
             0,
             0,
             0});
@@ -155,7 +161,7 @@
             // 
             this.chipsLabel.AutoSize = true;
             this.chipsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chipsLabel.Location = new System.Drawing.Point(271, 225);
+            this.chipsLabel.Location = new System.Drawing.Point(271, 196);
             this.chipsLabel.Name = "chipsLabel";
             this.chipsLabel.Size = new System.Drawing.Size(278, 24);
             this.chipsLabel.TabIndex = 3;
@@ -164,7 +170,7 @@
             // chipsUpDown
             // 
             this.chipsUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chipsUpDown.Location = new System.Drawing.Point(555, 223);
+            this.chipsUpDown.Location = new System.Drawing.Point(555, 194);
             this.chipsUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -183,7 +189,7 @@
             // 
             this.bumberOfPlayersLabel.AutoSize = true;
             this.bumberOfPlayersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bumberOfPlayersLabel.Location = new System.Drawing.Point(349, 169);
+            this.bumberOfPlayersLabel.Location = new System.Drawing.Point(349, 140);
             this.bumberOfPlayersLabel.Name = "bumberOfPlayersLabel";
             this.bumberOfPlayersLabel.Size = new System.Drawing.Size(200, 24);
             this.bumberOfPlayersLabel.TabIndex = 1;
@@ -192,7 +198,7 @@
             // numberOfPlayersUpDown
             // 
             this.numberOfPlayersUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numberOfPlayersUpDown.Location = new System.Drawing.Point(555, 167);
+            this.numberOfPlayersUpDown.Location = new System.Drawing.Point(555, 138);
             this.numberOfPlayersUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -209,6 +215,12 @@
             // 
             // gamePage
             // 
+            this.gamePage.Controls.Add(this.loseListBox);
+            this.gamePage.Controls.Add(this.loseListLabel);
+            this.gamePage.Controls.Add(this.bankChips);
+            this.gamePage.Controls.Add(this.bankChipsStaticLabel);
+            this.gamePage.Controls.Add(this.numChips);
+            this.gamePage.Controls.Add(this.chipsLabelStatic);
             this.gamePage.Controls.Add(this.scoreLabel);
             this.gamePage.Controls.Add(this.label1);
             this.gamePage.Controls.Add(this.idLabel);
@@ -324,6 +336,67 @@
             this.newRoundButton.TabIndex = 2;
             this.newRoundButton.Text = "Новый раунд";
             this.newRoundButton.UseVisualStyleBackColor = true;
+            this.newRoundButton.Click += new System.EventHandler(this.newRoundButton_Click);
+            // 
+            // chipsLabelStatic
+            // 
+            this.chipsLabelStatic.AutoSize = true;
+            this.chipsLabelStatic.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chipsLabelStatic.Location = new System.Drawing.Point(690, 17);
+            this.chipsLabelStatic.Name = "chipsLabelStatic";
+            this.chipsLabelStatic.Size = new System.Drawing.Size(147, 24);
+            this.chipsLabelStatic.TabIndex = 7;
+            this.chipsLabelStatic.Text = "Фишки игрока: ";
+            // 
+            // numChips
+            // 
+            this.numChips.AutoSize = true;
+            this.numChips.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numChips.Location = new System.Drawing.Point(843, 17);
+            this.numChips.Name = "numChips";
+            this.numChips.Size = new System.Drawing.Size(20, 24);
+            this.numChips.TabIndex = 8;
+            this.numChips.Text = "0";
+            // 
+            // bankChips
+            // 
+            this.bankChips.AutoSize = true;
+            this.bankChips.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bankChips.Location = new System.Drawing.Point(843, 57);
+            this.bankChips.Name = "bankChips";
+            this.bankChips.Size = new System.Drawing.Size(20, 24);
+            this.bankChips.TabIndex = 10;
+            this.bankChips.Text = "0";
+            // 
+            // bankChipsStaticLabel
+            // 
+            this.bankChipsStaticLabel.AutoSize = true;
+            this.bankChipsStaticLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bankChipsStaticLabel.Location = new System.Drawing.Point(690, 57);
+            this.bankChipsStaticLabel.Name = "bankChipsStaticLabel";
+            this.bankChipsStaticLabel.Size = new System.Drawing.Size(122, 24);
+            this.bankChipsStaticLabel.TabIndex = 9;
+            this.bankChipsStaticLabel.Text = "Банк фишек:";
+            // 
+            // loseListBox
+            // 
+            this.loseListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.loseListBox.FormattingEnabled = true;
+            this.loseListBox.ItemHeight = 24;
+            this.loseListBox.Location = new System.Drawing.Point(675, 327);
+            this.loseListBox.Name = "loseListBox";
+            this.loseListBox.Size = new System.Drawing.Size(190, 124);
+            this.loseListBox.TabIndex = 12;
+            // 
+            // loseListLabel
+            // 
+            this.loseListLabel.AutoSize = true;
+            this.loseListLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.loseListLabel.Location = new System.Drawing.Point(690, 294);
+            this.loseListLabel.Name = "loseListLabel";
+            this.loseListLabel.Size = new System.Drawing.Size(160, 24);
+            this.loseListLabel.TabIndex = 11;
+            this.loseListLabel.Text = "Выбыли из игры:";
             // 
             // Main
             // 
@@ -372,6 +445,12 @@
         private System.Windows.Forms.Label winnersLabelStatic;
         private System.Windows.Forms.ListBox winnersListBox;
         private System.Windows.Forms.Button newRoundButton;
+        private System.Windows.Forms.Label numChips;
+        private System.Windows.Forms.Label chipsLabelStatic;
+        private System.Windows.Forms.Label bankChips;
+        private System.Windows.Forms.Label bankChipsStaticLabel;
+        private System.Windows.Forms.ListBox loseListBox;
+        private System.Windows.Forms.Label loseListLabel;
     }
 }
 

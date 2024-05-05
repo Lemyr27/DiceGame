@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,7 +32,6 @@ namespace DiceGame
             selectTab(paramsPage);
         }
 
-        // Списать фишки
         private void startGameButton_Click(object sender, EventArgs e)
         {
             int numberOfPlayers = (int)numberOfPlayersUpDown.Value;
@@ -41,6 +41,10 @@ namespace DiceGame
             Player player = game.playersList[0];
             game.createRound(player);
             round = game.roundsList.Last();
+            foreach (Player pl in game.playersList)
+            {
+                round.paymentPerRound(pl);
+            }
 
             uiUpdate(player);
             selectTab(gamePage);
@@ -75,10 +79,6 @@ namespace DiceGame
             return result;
         }
 
-        // Списать фишки
-        // проверка для фишек(убирать игрока без фишек)
-        // отобразить фишки игрока во время игры
-        // начало нового раунда - добавить метод(возможно первого игрока тащить в конец списка)
         // проверка для конца игры(все 0 кроме одного), Экран победителя всей игры
         // новая игра полное обнуление
         private void passButton_Click(object sender, EventArgs e)
@@ -91,11 +91,26 @@ namespace DiceGame
             }
             
             List<Player> winners = getWinnersList(round);
+            winnersListBox.Items.Clear();
             foreach (Player winner in winners)
             {
                 winnersListBox.Items.Add($"Игрок {winner.id}: {getPlayerScore(winner, round)}");
             }
+            giveChips(round);
             selectTab(winnersPage);
+        }
+
+        private void giveChips(Round round)
+        {
+            var winners = getWinnersList(round);
+            int len = winners.Count;
+            int numChips = round.bankOfChips;
+            int fullChips = numChips / len;
+            foreach (Player player in winners)
+            {
+                player.chips += fullChips;
+            }
+            round.bankOfChips -= fullChips;
         }
 
         private List<Player> getWinnersList(Round round)
@@ -125,6 +140,36 @@ namespace DiceGame
             scoreLabel.Text = "0";
             rollDiceButton.Enabled = true;
             passButton.Enabled = false;
+            numChips.Text = $"{player.chips}";
+            bankChips.Text = $"{round.bankOfChips}";
+        }
+
+        // Остаются игроки которые должны выбыть из игры
+        private void newRoundButton_Click(object sender, EventArgs e)
+        {
+            Player player = game.playersList[0];
+            game.playersList.Remove(player);
+            game.playersList.Add(player);
+            Player currentPlayer = game.playersList.First();
+            Round newRound = game.createRound(currentPlayer);
+            round = newRound;
+            List<Player> losers = new List<Player> { };
+
+            foreach (Player pl in game.playersList)
+            {
+                if (round.paymentPerRound(pl) == -1)
+                {
+                    loseListBox.Items.Add($"Игрок {pl.id}");
+                    losers.Add(pl);
+                }
+            }
+            foreach (Player pl in losers)
+            {
+                game.playersList.Remove(pl);
+            }
+
+            uiUpdate(currentPlayer);
+            selectTab(gamePage);
         }
     }
 }
