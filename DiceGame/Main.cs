@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DiceGame
@@ -79,11 +73,10 @@ namespace DiceGame
             return result;
         }
 
-        // проверка для конца игры(все 0 кроме одного), Экран победителя всей игры
         // новая игра полное обнуление
         private void passButton_Click(object sender, EventArgs e)
         {
-            if (round.currentPlayer.id != game.playersList.Last().id)
+            if (round.currentPlayer != game.playersList.Last())
             {
                 Player player = round.currentPlayer.makePass(game);
                 uiUpdate(player);
@@ -91,12 +84,20 @@ namespace DiceGame
             }
             
             List<Player> winners = getWinnersList(round);
-            winnersListBox.Items.Clear();
-            foreach (Player winner in winners)
+            if (winners.Any())
             {
-                winnersListBox.Items.Add($"Игрок {winner.id}: {getPlayerScore(winner, round)}");
+                winnersListBox.Items.Clear();
+                foreach (Player winner in winners)
+                {
+                    winnersListBox.Items.Add($"Игрок {winner.id}: {getPlayerScore(winner, round)}");
+                }
+                giveChips(round);
             }
-            giveChips(round);
+            else
+            {
+                winnersListBox.Items.Clear();
+                winnersListBox.Items.Add($"Никто не выиграл");
+            }
             selectTab(winnersPage);
         }
 
@@ -124,13 +125,16 @@ namespace DiceGame
             var values = scores
                 .Where(pair => pair.Value <= 21)
                 .GroupBy(pair => pair.Value)
-                .OrderByDescending(group => group.Key)
-                .First();
+                .OrderByDescending(group => group.Key);
 
-            foreach (var score in values)
+            if (!values.Any()) return winners;
+
+            var newValue = values.First();
+            foreach (var score in newValue)
             {
                 winners.Add(score.Key);
             }
+
             return winners;
         }
 
@@ -142,19 +146,18 @@ namespace DiceGame
             passButton.Enabled = false;
             numChips.Text = $"{player.chips}";
             bankChips.Text = $"{round.bankOfChips}";
+            roundNum.Text = $"{round.roundNumber}";
         }
 
-        // Остаются игроки которые должны выбыть из игры
         private void newRoundButton_Click(object sender, EventArgs e)
         {
-            Player player = game.playersList[0];
-            game.playersList.Remove(player);
+            Player player = game.playersList.First();
+            game.playersList.RemoveAt(0);
             game.playersList.Add(player);
             Player currentPlayer = game.playersList.First();
-            Round newRound = game.createRound(currentPlayer);
-            round = newRound;
-            List<Player> losers = new List<Player> { };
+            round = game.createRound(currentPlayer);
 
+            List<Player> losers = new List<Player> { };
             foreach (Player pl in game.playersList)
             {
                 if (round.paymentPerRound(pl) == -1)
@@ -163,13 +166,44 @@ namespace DiceGame
                     losers.Add(pl);
                 }
             }
+
             foreach (Player pl in losers)
             {
                 game.playersList.Remove(pl);
             }
 
-            uiUpdate(currentPlayer);
+            if (losers.Contains(currentPlayer))
+            {
+                round.currentPlayer = game.playersList.First();
+            }
+
+            if (game.playersList.Count == 1)
+            {
+                nameWinner.Text = $"Игрок {game.playersList.First().id}!";
+                selectTab(gameWinnerPage);
+                return;
+            }
+
+            uiUpdate(game.playersList.First());
             selectTab(gamePage);
+        }
+
+        // Выводится один и тот же победитель, потому что игроки удаляются из игры,
+        // нужно реализовать переход хода без удаления игрока из списка
+        private void statisticButton_Click(object sender, EventArgs e)
+        {
+            statisticListView.Items.Clear();
+            foreach (Round round in game.roundsList)
+            {
+                statisticListView.Items.Add($"Раунд {round.roundNumber}, победители:");
+                List<Player> winners = getWinnersList(round);
+                foreach (Player winner in winners)
+                {
+                    statisticListView.Items.Add($"Игрок {winner.id}, получивший {getPlayerScore(winner, round)} очков") ;
+                }
+                statisticListView.Items.Add($"");
+            }
+            selectTab(statisticPage);
         }
     }
 }

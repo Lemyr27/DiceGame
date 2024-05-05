@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Windows.Forms;
 
 namespace DiceGame
 {
