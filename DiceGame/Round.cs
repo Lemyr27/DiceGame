@@ -11,7 +11,7 @@ namespace DiceGame
         public int bankOfChips = 0;
         public List<Roll> rollsList = new List<Roll> { };
 
-        public Round(Player currentPlayer)
+    public Round(Player currentPlayer)
         {
             roundNumber = ++currentId;
             this.currentPlayer = currentPlayer;

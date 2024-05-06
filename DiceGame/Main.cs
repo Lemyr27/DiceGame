@@ -33,8 +33,7 @@ namespace DiceGame
             int minNumToPass = (int)minNumToPassUpDown.Value;
             game = new Game(numberOfPlayers, chipsForOnePlayer, minNumToPass);
             Player player = game.playersList[0];
-            game.createRound(player);
-            round = game.roundsList.Last();
+            round = game.createRound(player);
             foreach (Player pl in game.playersList)
             {
                 round.paymentPerRound(pl);
@@ -117,22 +116,23 @@ namespace DiceGame
         private List<Player> getWinnersList(Round round)
         {
             List<Player> winners = new List<Player> { };
-            Dictionary<Player, int> scores = new Dictionary<Player, int> { };
-            foreach (Player player in game.playersList)
+            var rolls = round.rollsList;
+            var grouped = rolls.GroupBy(r => r.playerValue.Item1)
+                          .Select(g => new { g.Key, Sum = g.Sum(r => r.playerValue.Item2) })
+                          .Where(g => g.Sum <= 21)
+                          .OrderByDescending(g => g.Sum);
+
+            if (!grouped.Any())
             {
-                scores.Add(player, getPlayerScore(player, round));
+                return winners;
             }
-            var values = scores
-                .Where(pair => pair.Value <= 21)
-                .GroupBy(pair => pair.Value)
-                .OrderByDescending(group => group.Key);
 
-            if (!values.Any()) return winners;
+            var maxSum = grouped.First().Sum;
+            var maxSumGroups = grouped.Where(g => g.Sum == maxSum);
 
-            var newValue = values.First();
-            foreach (var score in newValue)
+            foreach (var group in maxSumGroups)
             {
-                winners.Add(score.Key);
+                winners.Add(group.Key);
             }
 
             return winners;
@@ -188,22 +188,36 @@ namespace DiceGame
             selectTab(gamePage);
         }
 
-        // Выводится один и тот же победитель, потому что игроки удаляются из игры,
-        // нужно реализовать переход хода без удаления игрока из списка
         private void statisticButton_Click(object sender, EventArgs e)
         {
-            statisticListView.Items.Clear();
+            var view = statisticListView.Items;
+            view.Clear();
             foreach (Round round in game.roundsList)
             {
-                statisticListView.Items.Add($"Раунд {round.roundNumber}, победители:");
+                view.Add($"Раунд {round.roundNumber}, победители:");
                 List<Player> winners = getWinnersList(round);
+                if (!winners.Any())
+                {
+                    view.Add("Никто не одержал победу в этом раунде");
+                }
                 foreach (Player winner in winners)
                 {
-                    statisticListView.Items.Add($"Игрок {winner.id}, получивший {getPlayerScore(winner, round)} очков") ;
+                    view.Add($"Игрок {winner.id}, получивший {getPlayerScore(winner, round)} очков");
                 }
-                statisticListView.Items.Add($"");
+                view.Add($"");
             }
+            RemoveLast(view, 3);
+            view.Add("Победитель игры:");
+            view.Add($"Игрок {round.currentPlayer.id}!");
             selectTab(statisticPage);
+        }
+
+        private static void RemoveLast(ListBox.ObjectCollection view, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                view.RemoveAt(view.Count - 1);
+            }
         }
     }
 }
