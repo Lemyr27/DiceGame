@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,11 +11,23 @@ namespace DiceGame
     {
         Game game;
         Round round;
+        int pictureBoxNum;
 
         public Main()
         {
             InitializeComponent();
         }
+
+        private List<Bitmap> pictures = new List<Bitmap>
+        {
+            Properties.Resources._1d,
+            Properties.Resources._2d,
+            Properties.Resources._3d,
+            Properties.Resources._4d,
+            Properties.Resources._5d,
+            Properties.Resources._6d,
+        };
+
 
         private void selectTab(TabPage tab)
         {
@@ -34,6 +47,7 @@ namespace DiceGame
             game = new Game(numberOfPlayers, chipsForOnePlayer, minNumToPass);
             Player player = game.playersList[0];
             round = game.createRound(player);
+            pictureBoxNum = 0;
             foreach (Player pl in game.playersList)
             {
                 round.paymentPerRound(pl);
@@ -45,11 +59,20 @@ namespace DiceGame
 
         private void rollDiceButton_Click(object sender, EventArgs e)
         {
+            List<PictureBox> pictureBoxes = new List<PictureBox>
+            {
+                pictureBox1, pictureBox2, pictureBox3, pictureBox4, pictureBox5, pictureBox6,
+                pictureBox7, pictureBox8, pictureBox9, pictureBox10, pictureBox11, pictureBox12,
+                pictureBox13, pictureBox14, pictureBox15, pictureBox16, pictureBox17, pictureBox18,
+                pictureBox19, pictureBox20, pictureBox21, pictureBox22
+            };
+
             Player player = round.currentPlayer;
             Roll roll = player.rollDice();
             round.rollsList.Add(roll);
             rollPassCheck();
             scoreLabel.Text = $"{getPlayerScore(player, round)}";
+            pictureBoxes[pictureBoxNum++].Image = pictures[roll.playerValue.Item2 - 1];
         }
 
         private void rollPassCheck()
@@ -74,6 +97,21 @@ namespace DiceGame
 
         private void passButton_Click(object sender, EventArgs e)
         {
+            List<PictureBox> pictureBoxes = new List<PictureBox>
+            {
+                pictureBox1, pictureBox2, pictureBox3, pictureBox4, pictureBox5, pictureBox6,
+                pictureBox7, pictureBox8, pictureBox9, pictureBox10, pictureBox11, pictureBox12,
+                pictureBox13, pictureBox14, pictureBox15, pictureBox16, pictureBox17, pictureBox18,
+                pictureBox19, pictureBox20, pictureBox21, pictureBox22
+            };
+
+            foreach (var pb in pictureBoxes)
+            {
+                pb.Image = null;
+            }
+
+            pictureBoxNum = 0;
+
             if (round.currentPlayer != game.playersList.Last())
             {
                 Player player = round.currentPlayer.makePass(game);
@@ -185,6 +223,7 @@ namespace DiceGame
 
             uiUpdate(game.playersList.First());
             selectTab(gamePage);
+            pictureBoxNum = 0;
         }
 
         private void statisticButton_Click(object sender, EventArgs e)
