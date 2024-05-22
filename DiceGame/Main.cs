@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace DiceGame
@@ -114,11 +115,25 @@ namespace DiceGame
 
             if (round.currentPlayer != game.playersList.Last())
             {
+                int score = getPlayerScore(round.currentPlayer, round);
+                dataGridView.Rows.Add(
+                    $"Игрок {round.currentPlayer.id}",
+                    score
+                );
+                dataGridView.ClearSelection();
+                if (score > 21)
+                {
+                    dataGridView.Rows[dataGridView.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
+                }
+                if (score == 21)
+                {
+                    dataGridView.Rows[dataGridView.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Green;
+                }
                 Player player = round.currentPlayer.makePass(game);
                 uiUpdate(player);
                 return;
             }
-            
+
             List<Player> winners = getWinnersList(round);
             if (winners.Any())
             {
@@ -135,6 +150,7 @@ namespace DiceGame
                 winnersListBox.Items.Add($"Никто не выиграл");
             }
             selectTab(winnersPage);
+
         }
 
         private void giveChips(Round round)
@@ -199,10 +215,11 @@ namespace DiceGame
             {
                 if (round.paymentPerRound(pl) == -1)
                 {
-                    loseListBox.Items.Add($"Игрок {pl.id}");
                     losers.Add(pl);
                 }
             }
+
+            dataGridView.Rows.Clear();
 
             foreach (Player pl in losers)
             {
