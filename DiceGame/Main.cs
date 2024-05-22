@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace DiceGame
@@ -52,10 +51,11 @@ namespace DiceGame
             foreach (Player pl in game.playersList)
             {
                 round.paymentPerRound(pl);
+                dataGridViewChips.Rows.Add($"Игрок {pl.id}", pl.chips);
             }
-
             uiUpdate(player);
             selectTab(gamePage);
+            dataGridViewChips.ClearSelection();
         }
 
         private void rollDiceButton_Click(object sender, EventArgs e)
@@ -127,7 +127,7 @@ namespace DiceGame
                 }
                 if (score == 21)
                 {
-                    dataGridView.Rows[dataGridView.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Green;
+                    dataGridView.Rows[dataGridView.Rows.Count - 1].DefaultCellStyle.BackColor = Color.LightGreen;
                 }
                 Player player = round.currentPlayer.makePass(game);
                 uiUpdate(player);
@@ -200,6 +200,7 @@ namespace DiceGame
             numChips.Text = $"{player.chips}";
             bankChips.Text = $"{round.bankOfChips}";
             roundNum.Text = $"{round.roundNumber}";
+            dataGridViewChips.ClearSelection();
         }
 
         private void newRoundButton_Click(object sender, EventArgs e)
@@ -210,6 +211,8 @@ namespace DiceGame
             Player currentPlayer = game.playersList.First();
             round = game.createRound(currentPlayer);
 
+            dataGridViewChips.Rows.Clear();
+
             List<Player> losers = new List<Player> { };
             foreach (Player pl in game.playersList)
             {
@@ -217,7 +220,9 @@ namespace DiceGame
                 {
                     losers.Add(pl);
                 }
+                dataGridViewChips.Rows.Add($"Игрок {pl.id}", pl.chips);
             }
+            dataGridViewChips.ClearSelection();
 
             dataGridView.Rows.Clear();
 

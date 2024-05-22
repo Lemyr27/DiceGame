@@ -86,6 +86,10 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewChips = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.playerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.scoreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
@@ -121,6 +125,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChips)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -277,6 +282,8 @@
             // 
             // gamePage
             // 
+            this.gamePage.Controls.Add(this.label2);
+            this.gamePage.Controls.Add(this.dataGridViewChips);
             this.gamePage.Controls.Add(this.dataGridView);
             this.gamePage.Controls.Add(this.pictureBox22);
             this.gamePage.Controls.Add(this.pictureBox21);
@@ -771,16 +778,57 @@
             this.dataGridView.Size = new System.Drawing.Size(203, 157);
             this.dataGridView.TabIndex = 37;
             // 
+            // dataGridViewChips
+            // 
+            this.dataGridViewChips.AllowUserToAddRows = false;
+            this.dataGridViewChips.AllowUserToDeleteRows = false;
+            this.dataGridViewChips.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewChips.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+            this.dataGridViewChips.Enabled = false;
+            this.dataGridViewChips.Location = new System.Drawing.Point(19, 155);
+            this.dataGridViewChips.Name = "dataGridViewChips";
+            this.dataGridViewChips.ReadOnly = true;
+            this.dataGridViewChips.RowHeadersVisible = false;
+            this.dataGridViewChips.Size = new System.Drawing.Size(153, 150);
+            this.dataGridViewChips.TabIndex = 38;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(15, 125);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(177, 24);
+            this.label2.TabIndex = 39;
+            this.label2.Text = "Состояние фишек:";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Игрок";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Фишки";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 50;
+            // 
             // playerColumn
             // 
             this.playerColumn.HeaderText = "Игрок";
             this.playerColumn.Name = "playerColumn";
+            this.playerColumn.ReadOnly = true;
             this.playerColumn.Width = 150;
             // 
             // scoreColumn
             // 
             this.scoreColumn.HeaderText = "Очки";
             this.scoreColumn.Name = "scoreColumn";
+            this.scoreColumn.ReadOnly = true;
             this.scoreColumn.Width = 50;
             // 
             // Main
@@ -829,6 +877,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChips)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -893,6 +942,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox22;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridViewChips;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn playerColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn scoreColumn;
     }
