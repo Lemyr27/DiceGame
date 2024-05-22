@@ -72,7 +72,6 @@ namespace DiceGame
             return result;
         }
 
-        // новая игра полное обнуление
         private void passButton_Click(object sender, EventArgs e)
         {
             if (round.currentPlayer != game.playersList.Last())

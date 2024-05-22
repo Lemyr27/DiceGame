@@ -28,10 +28,5 @@ namespace DiceGame
             round.currentPlayer = newPlayer;
             return newPlayer;
         }
-
-        public void endGame(Game game)
-        {
-
-        }
     }
 }

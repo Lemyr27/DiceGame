@@ -40,6 +40,8 @@
             this.bumberOfPlayersLabel = new System.Windows.Forms.Label();
             this.numberOfPlayersUpDown = new System.Windows.Forms.NumericUpDown();
             this.gamePage = new System.Windows.Forms.TabPage();
+            this.roundNum = new System.Windows.Forms.Label();
+            this.roundLabel = new System.Windows.Forms.Label();
             this.loseListBox = new System.Windows.Forms.ListBox();
             this.loseListLabel = new System.Windows.Forms.Label();
             this.bankChips = new System.Windows.Forms.Label();
@@ -56,12 +58,10 @@
             this.newRoundButton = new System.Windows.Forms.Button();
             this.winnersListBox = new System.Windows.Forms.ListBox();
             this.winnersLabelStatic = new System.Windows.Forms.Label();
-            this.roundNum = new System.Windows.Forms.Label();
-            this.roundLabel = new System.Windows.Forms.Label();
             this.gameWinnerPage = new System.Windows.Forms.TabPage();
-            this.gameWinnerLabel = new System.Windows.Forms.Label();
-            this.nameWinner = new System.Windows.Forms.Label();
             this.statisticButton = new System.Windows.Forms.Button();
+            this.nameWinner = new System.Windows.Forms.Label();
+            this.gameWinnerLabel = new System.Windows.Forms.Label();
             this.statisticPage = new System.Windows.Forms.TabPage();
             this.statisticListView = new System.Windows.Forms.ListBox();
             this.tabControl.SuspendLayout();
@@ -86,20 +86,23 @@
             this.tabControl.Controls.Add(this.statisticPage);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.tabControl.ItemSize = new System.Drawing.Size(1, 1);
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl.Name = "tabControl";
+            this.tabControl.Padding = new System.Drawing.Point(0, 0);
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(894, 500);
+            this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl.TabIndex = 0;
             // 
             // mainMenuPage
             // 
             this.mainMenuPage.Controls.Add(this.paramsButton);
-            this.mainMenuPage.Location = new System.Drawing.Point(4, 22);
+            this.mainMenuPage.Location = new System.Drawing.Point(4, 5);
             this.mainMenuPage.Name = "mainMenuPage";
             this.mainMenuPage.Padding = new System.Windows.Forms.Padding(3);
-            this.mainMenuPage.Size = new System.Drawing.Size(886, 474);
+            this.mainMenuPage.Size = new System.Drawing.Size(886, 491);
             this.mainMenuPage.TabIndex = 0;
             this.mainMenuPage.UseVisualStyleBackColor = true;
             // 
@@ -123,10 +126,10 @@
             this.paramsPage.Controls.Add(this.chipsUpDown);
             this.paramsPage.Controls.Add(this.bumberOfPlayersLabel);
             this.paramsPage.Controls.Add(this.numberOfPlayersUpDown);
-            this.paramsPage.Location = new System.Drawing.Point(4, 22);
+            this.paramsPage.Location = new System.Drawing.Point(4, 5);
             this.paramsPage.Name = "paramsPage";
             this.paramsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.paramsPage.Size = new System.Drawing.Size(886, 474);
+            this.paramsPage.Size = new System.Drawing.Size(886, 491);
             this.paramsPage.TabIndex = 1;
             this.paramsPage.UseVisualStyleBackColor = true;
             // 
@@ -241,11 +244,31 @@
             this.gamePage.Controls.Add(this.playerInfoLabel);
             this.gamePage.Controls.Add(this.passButton);
             this.gamePage.Controls.Add(this.rollDiceButton);
-            this.gamePage.Location = new System.Drawing.Point(4, 22);
+            this.gamePage.Location = new System.Drawing.Point(4, 5);
             this.gamePage.Name = "gamePage";
-            this.gamePage.Size = new System.Drawing.Size(886, 474);
+            this.gamePage.Size = new System.Drawing.Size(886, 491);
             this.gamePage.TabIndex = 2;
             this.gamePage.UseVisualStyleBackColor = true;
+            // 
+            // roundNum
+            // 
+            this.roundNum.AutoSize = true;
+            this.roundNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.roundNum.Location = new System.Drawing.Point(87, 17);
+            this.roundNum.Name = "roundNum";
+            this.roundNum.Size = new System.Drawing.Size(20, 24);
+            this.roundNum.TabIndex = 14;
+            this.roundNum.Text = "0";
+            // 
+            // roundLabel
+            // 
+            this.roundLabel.AutoSize = true;
+            this.roundLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.roundLabel.Location = new System.Drawing.Point(8, 17);
+            this.roundLabel.Name = "roundLabel";
+            this.roundLabel.Size = new System.Drawing.Size(69, 24);
+            this.roundLabel.TabIndex = 13;
+            this.roundLabel.Text = "Раунд:";
             // 
             // loseListBox
             // 
@@ -375,9 +398,9 @@
             this.winnersPage.Controls.Add(this.newRoundButton);
             this.winnersPage.Controls.Add(this.winnersListBox);
             this.winnersPage.Controls.Add(this.winnersLabelStatic);
-            this.winnersPage.Location = new System.Drawing.Point(4, 22);
+            this.winnersPage.Location = new System.Drawing.Point(4, 5);
             this.winnersPage.Name = "winnersPage";
-            this.winnersPage.Size = new System.Drawing.Size(886, 474);
+            this.winnersPage.Size = new System.Drawing.Size(886, 491);
             this.winnersPage.TabIndex = 3;
             this.winnersPage.UseVisualStyleBackColor = true;
             // 
@@ -412,57 +435,16 @@
             this.winnersLabelStatic.TabIndex = 0;
             this.winnersLabelStatic.Text = "Победители раунда:";
             // 
-            // roundNum
-            // 
-            this.roundNum.AutoSize = true;
-            this.roundNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.roundNum.Location = new System.Drawing.Point(87, 17);
-            this.roundNum.Name = "roundNum";
-            this.roundNum.Size = new System.Drawing.Size(20, 24);
-            this.roundNum.TabIndex = 14;
-            this.roundNum.Text = "0";
-            // 
-            // roundLabel
-            // 
-            this.roundLabel.AutoSize = true;
-            this.roundLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.roundLabel.Location = new System.Drawing.Point(8, 17);
-            this.roundLabel.Name = "roundLabel";
-            this.roundLabel.Size = new System.Drawing.Size(69, 24);
-            this.roundLabel.TabIndex = 13;
-            this.roundLabel.Text = "Раунд:";
-            // 
             // gameWinnerPage
             // 
             this.gameWinnerPage.Controls.Add(this.statisticButton);
             this.gameWinnerPage.Controls.Add(this.nameWinner);
             this.gameWinnerPage.Controls.Add(this.gameWinnerLabel);
-            this.gameWinnerPage.Location = new System.Drawing.Point(4, 22);
+            this.gameWinnerPage.Location = new System.Drawing.Point(4, 5);
             this.gameWinnerPage.Name = "gameWinnerPage";
-            this.gameWinnerPage.Size = new System.Drawing.Size(886, 474);
+            this.gameWinnerPage.Size = new System.Drawing.Size(886, 491);
             this.gameWinnerPage.TabIndex = 4;
             this.gameWinnerPage.UseVisualStyleBackColor = true;
-            // 
-            // gameWinnerLabel
-            // 
-            this.gameWinnerLabel.AutoSize = true;
-            this.gameWinnerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gameWinnerLabel.Location = new System.Drawing.Point(323, 80);
-            this.gameWinnerLabel.Name = "gameWinnerLabel";
-            this.gameWinnerLabel.Size = new System.Drawing.Size(240, 31);
-            this.gameWinnerLabel.TabIndex = 1;
-            this.gameWinnerLabel.Text = "Победитель игры:";
-            // 
-            // nameWinner
-            // 
-            this.nameWinner.AutoSize = true;
-            this.nameWinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nameWinner.Location = new System.Drawing.Point(382, 180);
-            this.nameWinner.Name = "nameWinner";
-            this.nameWinner.Size = new System.Drawing.Size(123, 31);
-            this.nameWinner.TabIndex = 2;
-            this.nameWinner.Text = "Игрок N!";
-            this.nameWinner.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // statisticButton
             // 
@@ -475,12 +457,33 @@
             this.statisticButton.UseVisualStyleBackColor = true;
             this.statisticButton.Click += new System.EventHandler(this.statisticButton_Click);
             // 
+            // nameWinner
+            // 
+            this.nameWinner.AutoSize = true;
+            this.nameWinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nameWinner.Location = new System.Drawing.Point(382, 180);
+            this.nameWinner.Name = "nameWinner";
+            this.nameWinner.Size = new System.Drawing.Size(123, 31);
+            this.nameWinner.TabIndex = 2;
+            this.nameWinner.Text = "Игрок N!";
+            this.nameWinner.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // gameWinnerLabel
+            // 
+            this.gameWinnerLabel.AutoSize = true;
+            this.gameWinnerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gameWinnerLabel.Location = new System.Drawing.Point(323, 80);
+            this.gameWinnerLabel.Name = "gameWinnerLabel";
+            this.gameWinnerLabel.Size = new System.Drawing.Size(240, 31);
+            this.gameWinnerLabel.TabIndex = 1;
+            this.gameWinnerLabel.Text = "Победитель игры:";
+            // 
             // statisticPage
             // 
             this.statisticPage.Controls.Add(this.statisticListView);
-            this.statisticPage.Location = new System.Drawing.Point(4, 22);
+            this.statisticPage.Location = new System.Drawing.Point(4, 5);
             this.statisticPage.Name = "statisticPage";
-            this.statisticPage.Size = new System.Drawing.Size(886, 474);
+            this.statisticPage.Size = new System.Drawing.Size(886, 491);
             this.statisticPage.TabIndex = 5;
             this.statisticPage.UseVisualStyleBackColor = true;
             // 
@@ -492,7 +495,7 @@
             this.statisticListView.ItemHeight = 25;
             this.statisticListView.Location = new System.Drawing.Point(0, 0);
             this.statisticListView.Name = "statisticListView";
-            this.statisticListView.Size = new System.Drawing.Size(886, 474);
+            this.statisticListView.Size = new System.Drawing.Size(886, 491);
             this.statisticListView.TabIndex = 0;
             // 
             // Main
@@ -503,7 +506,7 @@
             this.Controls.Add(this.tabControl);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Главное меню";
+            this.Text = "21 на костях";
             this.tabControl.ResumeLayout(false);
             this.mainMenuPage.ResumeLayout(false);
             this.paramsPage.ResumeLayout(false);
